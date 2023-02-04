@@ -49,25 +49,25 @@ We have implemented a recommendation system and have also generated a image of t
 ## ScreenShots
 
 - Home Page
-![Home Page](./screenshots/homescreen.jpeg)
+<img src="./screenshots/homescreen.jpeg" width="128"/>
 
 - Featured Articles
-![Featured Aricles](./screenshots/featured_articles.jpeg)
+<img src="./screenshots/featured_articles.jpeg" width="128"/>
 
 - Word Cloud and Recommended Articles
-![Word Cloud](./screenshots/wordcloud.jpeg)
+<img src="./screenshots/wordcloud.jpeg" width="128"/>
 
 - Coordinated Networks
-![Coordinated Networks](./screenshots/Graph_of_coordinated_behaviour.jpeg)
+<img src="./screenshots/Graph_of_coordinated_behaviour.jpeg" width="128"/>
 
 - Propaganda Detection
-![Propaganda Detection](./screenshots/propaganda_detection.jpeg)
+<img src="./screenshots/propaganda_detection.jpeg" width="128"/>
 
 - Fake News Detection
-![Fake News Detection](./screenshots/fake_news.jpeg)
+<img src="./screenshots/fake_news.jpeg" width="128"/>
 
 - Agenda of the whole propaganda
-![Agenda](./screenshots/agenda.jpeg)
+<img src="./screenshots/agenda.jpeg" width="128"/>
 
 ## Developed By:
 
