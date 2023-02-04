@@ -4,6 +4,7 @@ analytical tools and extensions to study coordinated networks, toxic speech,
 conversations, accounts, and misinformation on social networks. You are not
 limited to using this dataset and can combine it with external datasets on factchecks, news credibility scores, other news data collections and others available on
 dataset aggregators including Google.
+
 ----------
 Stage 1: Perform network analysis and visualize the kinds of coordinated
 communities that exist with respect to what kind of topics and content these
@@ -16,6 +17,7 @@ URL multiple times in the past, within very short periods of time. If accounts X
 share an article URL more than 5 different times, within a certain time limit of each
 other, we consider it to be ‘coordinated inauthentic behavior’ because both
 accounts may be promoting the same article to get it more visibility on Twitter.
+
 ----------
 Stage 2: Estimate the Harms from Coordinated Behavior: We would be interested
 in any application that can automate analysis of the intentions or agenda of such
