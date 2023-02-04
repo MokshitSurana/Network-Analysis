@@ -71,15 +71,11 @@ We have implemented a recommendation system and have also generated a image of t
 
 ## Developed By:
 
-- Archit Rathod
-![Linkedin](https://www.linkedin.com/in/archit-rathod/)
+- [Archit Rathod](https://www.linkedin.com/in/archit-rathod/)
 
-- Mokshit Surana
-![Linkedin](https://www.linkedin.com/in/gigaMoksh/)
+- [Mokshit Surana](https://www.linkedin.com/in/gigaMoksh/)
 
-- Nahush Patil
-![Linkedin](https://www.linkedin.com/in/nahush-patil-29a495221/)
+- [Nahush Patil](https://www.linkedin.com/in/nahush-patil-29a495221/)
 
-- Omkar Bhostekar
-![Linkedin](https://www.linkedin.com/in/omkar-bhostekar/)
+- [Omkar Bhostekar](https://www.linkedin.com/in/omkar-bhostekar/)
 
