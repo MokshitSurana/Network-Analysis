@@ -29,3 +29,42 @@ social media presence, accounts using hate speech and harassment to troll some
 other accounts, and so on.
 
 Original PS: https://docs.google.com/document/d/1FSVBhtfw9p8ChREA0ANN4gSav6GntZvgwnyynv2zcfQ/edit
+
+## Features of our Website
+- Graph of Coordinated Networks
+We connect those people as nodes who have posted same articles after one another within a certain time limit and have done this in the past aswell. We refer this to as "coordinated inauthentic behavior"
+
+- Agenda Detection
+We also have tried to detect the agenda from the coordinated network of people using keyword extraction
+
+- Propaganda Detection
+We have also detected the whole propaganda of these networks. There are a total 14 different propagandas so this was a multi-class classification problem.
+
+- Fake News Detection
+We have applied sentiment analysis on the articles and have identified if they are fake or not.
+
+- Word Cloud and Recommendation System
+We have implemented a recommendation system and have also generated a image of the most important keywords in the whole article 
+
+## ScreenShots
+
+- Home Page
+![Home Page](./screenshots/homescreen.jpeg)
+
+- Featured Articles
+![Featured Aricles](./screenshots/featured_articles.jpeg)
+
+- Word Cloud and Recommended Articles
+![Word Cloud](./screenshots/wordcloud.jpeg)
+
+- Coordinated Networks
+![Coordinated Networks](./screenshots/Graph_of_coordinated_behaviour.jpeg)
+
+- Propaganda Detection
+![Propaganda Detection](./screenshots/propaganda_detection.jpeg)
+
+- Fake News Detection
+![Fake News Detection](./screenshots/fake_news.jpeg)
+
+- Agenda of the whole propaganda
+![Agenda](./screenshots/agenda.jpeg)
