@@ -68,3 +68,18 @@ We have implemented a recommendation system and have also generated a image of t
 
 - Agenda of the whole propaganda
 ![Agenda](./screenshots/agenda.jpeg)
+
+## Developed By:
+
+- Archit Rathod
+![Linkedin](https://www.linkedin.com/in/archit-rathod/)
+
+- Mokshit Surana
+![Linkedin](https://www.linkedin.com/in/gigaMoksh/)
+
+- Nahush Patil
+![Linkedin](https://www.linkedin.com/in/nahush-patil-29a495221/)
+
+- Omkar Bhostekar
+![Linkedin](https://www.linkedin.com/in/omkar-bhostekar/)
+
