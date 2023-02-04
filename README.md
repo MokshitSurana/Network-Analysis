@@ -13,9 +13,7 @@ What is ‘coordination’? The current Parrot Report site uses counts of any tw
 accounts, X and Y, sharing the same article URLs, and checks how frequently they
 share the same article within a 5, 10, 15, … 60 second window. If the window falls
 within 15 seconds, then it checks if these accounts have shared the same article
-URL multiple times in the past, within very short periods of time. If accounts X and Y
-share an article URL more than 5 different times, within a certain time limit of each
-other, we consider it to be ‘coordinated inauthentic behavior’ because both
+URL multiple times in the past, within very short periods of time. If accounts X and Y share an article URL more than 5 different times, within a certain time limit of each other, we consider it to be ‘coordinated inauthentic behavior’ because both
 accounts may be promoting the same article to get it more visibility on Twitter.
 
 ----------
@@ -49,25 +47,25 @@ We have implemented a recommendation system and have also generated a image of t
 ## ScreenShots
 
 - Home Page
-<img src="./screenshots/homescreen.jpeg" width="128"/>
+<img src="./screenshots/homescreen.jpeg"/>
 
 - Featured Articles
-<img src="./screenshots/featured_articles.jpeg" width="128"/>
+<img src="./screenshots/featured_articles.jpeg"/>
 
 - Word Cloud and Recommended Articles
-<img src="./screenshots/wordcloud.jpeg" width="128"/>
+<img src="./screenshots/wordcloud.jpeg"/>
 
 - Coordinated Networks
-<img src="./screenshots/Graph_of_coordinated_behaviour.jpeg" width="128"/>
+<img src="./screenshots/Graph_of_coordinated_behaviour.jpeg"/>
 
 - Propaganda Detection
-<img src="./screenshots/propaganda_detection.jpeg" width="128"/>
+<img src="./screenshots/propaganda_detection.jpeg"/>
 
 - Fake News Detection
-<img src="./screenshots/fake_news.jpeg" width="128"/>
+<img src="./screenshots/fake_news.jpeg"/>
 
 - Agenda of the whole propaganda
-<img src="./screenshots/agenda.jpeg" width="128"/>
+<img src="./screenshots/agenda.jpeg"/>
 
 ## Developed By:
 
