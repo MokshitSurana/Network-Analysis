@@ -10,4 +10,5 @@ export type Node = {
 export type Edge = {
   from: number;
   to: number;
+  arrows?: string;
 };

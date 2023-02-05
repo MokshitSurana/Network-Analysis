@@ -15,7 +15,7 @@ import names from "../../../utils/names_mapping.json";
 
 import { propagandaMap } from "../../../../config";
 import PieChart from "components/Charts/PieChart";
-
+import imgBlob from "public/test.png";
 const Props = {};
 
 const page = ({ params }: any) => {
@@ -25,7 +25,7 @@ const page = ({ params }: any) => {
   // let currArticle = allArticleFromDb.find((a) => a.id === `${articleId}`);
 
   const [article, setArticle] = useState<Article | null>(null);
-  const [imgBlob, setImgBlob] = useState<string>("");
+  // const [imgBlob, setImgBlob] = useState<string>("");
   const [graph, setGraph] = useState<Graph>();
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
@@ -40,7 +40,7 @@ const page = ({ params }: any) => {
   const [pie1, setPie1] = useState(50);
   const [pie2, setPie2] = useState(50);
 
-  const [pie1Data, setPie1Data] = useState();
+  const [pie1Data, setPie1Data] = useState(undefined);
   const [pie2Data, setPie2Data] = useState({
     labels: ["Bot", "Human"],
     datasets: [
@@ -54,11 +54,11 @@ const page = ({ params }: any) => {
     ],
   });
   const [tweetData, setTweetData] = useState({
-    labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    labels: [],
     datasets: [
       {
         label: "Tweet Analysis",
-        data: [120, 190, 300, 500, 200, 300, 100],
+        data: [],
         backgroundColor: ["rgb(129, 236, 236, 0.2)", "rgb(162, 155, 254, 0.2)"],
         borderColor: ["#00cec9", "#6c5ce7"],
         borderWidth: 1,
@@ -83,8 +83,9 @@ const page = ({ params }: any) => {
     let _nodes = [];
     let _edges = [];
     // let rank =
+    if (!graph.nodes || !graph.edges) return;
     for (let edge of graph.edges) {
-      _edges.push({ from: edge[0], to: edge[1] });
+      _edges.push({ from: edge[0], to: edge[1], arrows: "" });
     }
     for (let node of graph.nodes) {
       // @ts-ignore
@@ -119,7 +120,7 @@ const page = ({ params }: any) => {
   };
 
   const fetchFake = async (content: any) => {
-    fetch(`/api/ml/propaganda`, {
+    fetch(`/api/ml/fake`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ content: content }),
@@ -165,9 +166,37 @@ const page = ({ params }: any) => {
   useEffect(() => {
     if (!article) return;
     fetchProp(article.content);
-    fetchFake;
     fetchFake(article.content);
-    fetchImageBlob();
+    let keys = article["keys"];
+    let prob = article["prob"];
+    keys = keys.slice(1, keys.length - 1).split(", ");
+    const k = [];
+    for (let key of keys) {
+      k.push(key.slice(1, key.length - 1));
+    }
+    prob = prob.slice(1, prob.length - 1).split(", ");
+    const p = [];
+    for (let key of prob) {
+      p.push(parseFloat(key) * 100);
+    }
+    console.log("article", k, " ", prob);
+    setTweetData({
+      labels: k,
+      datasets: [
+        {
+          label: "Tweet Analysis",
+          data: p,
+          backgroundColor: [
+            "rgb(129, 236, 236, 0.2)",
+            "rgb(162, 155, 254, 0.2)",
+          ],
+          borderColor: ["#00cec9", "#6c5ce7"],
+          borderWidth: 1,
+        },
+      ],
+    });
+
+    // fetchImageBlob();
   }, [article]);
 
   const fetchImageBlob = () => {
@@ -187,12 +216,6 @@ const page = ({ params }: any) => {
       .then((res) => res.json())
       .then((data) => {
         setArticle(data);
-        const buffer = Buffer.from(data.wc.data);
-
-        const base64String = buffer.toString("base64");
-        setImgBlob("data:image/png;base64, " + base64String);
-        console.log(base64String);
-
         console.log(data);
       });
   };
@@ -205,13 +228,11 @@ const page = ({ params }: any) => {
 
         {/* image block */}
         <div className=" aspect-video w-auto md:w-full mx-8 md:mx-0">
-          {article && article.wc && article.wc.length > 0 && (
-            <img
-              src={"data:image/jpeg;base64," + window.btoa(article.wc)}
-              alt="blog"
-              className="w-full h-full object-cover object-center dark:shadow-blue-800 shadow-sm rounded-md shadow-gray-500"
-            />
-          )}
+          <img
+            src={`/${articleId}.png`}
+            alt="blog"
+            className="w-full h-full object-cover object-center dark:shadow-blue-800 shadow-sm rounded-md shadow-gray-500"
+          />
         </div>
 
         {/* related articles */}
@@ -239,64 +260,86 @@ const page = ({ params }: any) => {
             Network Visualization of Co-ordinated Behaviour
           </p>
           <div className="flex flex-col justify-center items-center">
-            <div className="h-96 w-full md:w-11/12 shadow-sm shadow-gray-600 dark:shadow-blue-800 dark:bg-slate-600 rounded-lg">
+            <div className="h-[500px] w-full md:w-11/12 shadow-sm shadow-gray-600 dark:shadow-blue-800 dark:bg-slate-600 rounded-lg">
               <NodeGraph nodes={nodes} edges={edges} />
             </div>
           </div>
         </div>
       )}
 
-      <div className="m-8">
-        <section className="text-gray-600 body-font overflow-hidden">
-          <p className="text-xl font-bold tracking-wide dark:text-white my-4 w-full text-center">
-            Propgandatic Keyword Detection
-          </p>
-          <div className="container px-5 py-24 mx-auto">
-            <div className="-my-8 divide-y-2 divide-gray-100">
-              {propagandas.map((propa: any, id: any) => {
-                return (
-                  <div key={id} className="py-8 flex flex-wrap md:flex-nowrap">
-                    <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-                      <span className="font-semibold title-font text-gray-700">
-                        {propa}
-                      </span>
+      {propagandas.length > 0 ? (
+        <div className="m-8">
+          <section className="text-gray-600 body-font overflow-hidden">
+            <p className="text-xl font-bold tracking-wide dark:text-white my-4 w-full text-center">
+              Propogandic Keyword Detection
+            </p>
+            <div className="container px-5 py-24 mx-auto">
+              <div className="-my-8 divide-y-2 divide-gray-100">
+                {propagandas.map((propa: any, id: any) => {
+                  return (
+                    <div
+                      key={id}
+                      className="py-8 flex flex-wrap md:flex-nowrap"
+                    >
+                      <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+                        <span className="font-semibold text-xl uppercase title-font dark:text-white text-gray-700">
+                          {propa}
+                        </span>
+                      </div>
+                      <div className="md:flex-grow">
+                        <h2 className="text-2xl font-medium dark:text-white text-gray-900 title-font mb-2">
+                          {propagandaMap[propa]}
+                        </h2>
+                      </div>
                     </div>
-                    <div className="md:flex-grow">
-                      <h2 className="text-2xl font-medium text-gray-900 title-font mb-2">
-                        {propagandaMap[propa]}
-                      </h2>
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
+      ) : (
+        <p className="py-12 mx-auto w-screen text-center text-2xl text-black dark:text-white ">
+          No Propogandic Keywords found
+        </p>
+      )}
+
+      <div className="my-card grid grid-cols-1 md:grid-cols-2 m-8 gap-4">
+        <div className="shadow-sm dark:text-white rounded-md items-center">
+          <p className="text-xl md:mt-24 font-bold tracking-wide dark:text-white my-4 w-full text-center">
+            Fake News Detection
+          </p>
+          <p className="text-2xl dark:text-gray-200 text-gray-700 text-center">
+            Tweet Frequencies, tweet content, tweet topics, tweet timing, and
+            tweet networks are some of the factors to decide whether the author
+            of the tweet is a real or fake.
+          </p>
+        </div>
+        <div className="shadow-sm dark:text-white  rounded-md">
+          {pie1Data && <PieChart chartData={pie1Data} />}
+        </div>
       </div>
 
-      <p className="text-xl font-bold tracking-wide dark:text-white my-4 w-full text-center">
-        Network Visualization of Co-ordinated Behaviour
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 m-8 gap-4">
-        <div className="shadow-sm dark:text-white dark:shadow-blue-800 shadow-gray-500 rounded-md">
+      <div className="my-card grid grid-cols-1 md:grid-cols-2 m-8 gap-4">
+        <div className="shadow-sm dark:text-white rounded-md">
           <BarChart chartData={tweetData} />
         </div>
-        <div className="shadow-sm dark:text-white dark:shadow-blue-800 shadow-gray-500 rounded-md">
+        <div className="mt-20">
+          <p className="text-xl font-bold tracking-wide dark:text-white my-4 w-full text-center">
+            Tweet Analysis
+          </p>
+          <p className="text-2xl dark:text-gray-200 text-gray-700 text-center">
+            Tweet analysis is the process of examining and analyzing the content
+            of tweets on social media platforms.
+          </p>
+        </div>
+        <div className="shadow-sm dark:text-white rounded-md">
           {/* <BarChart chartData={userData} /> */}
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 m-8 gap-4">
-        <div className="shadow-sm dark:text-white dark:shadow-blue-800 shadow-gray-500 rounded-md">
-          <PieChart chartData={pie1Data} />
-        </div>
-        <div className="shadow-sm dark:text-white dark:shadow-blue-800 shadow-gray-500 rounded-md">
-          {/* <PieChart chartData={pie2Data} /> */}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 mx-8 gap-4">
-        <div className="h-100 shadow-sm dark:shadow-blue-800 shadow-gray-500 rounded-md">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 mx-8 gap-4">
+        <div className="h-100 shadow-sm rounded-md">
           <div className="flex flex-col justify-center items-center m-4">
             <p className="text-2xl font-bold tracking-wide dark:text-white my-4">
               Source
@@ -344,7 +387,7 @@ const page = ({ params }: any) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };
