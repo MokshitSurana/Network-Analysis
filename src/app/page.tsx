@@ -19,7 +19,7 @@ import Card from "../../components/Card";
 
 type Props = {};
 
-const page = (props: Props) => {
+const Page = (props: Props) => {
   const [articles, setArticles] = useState(articlesStatic);
 
   // const fetchLatest = async () => {
@@ -889,4 +889,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;

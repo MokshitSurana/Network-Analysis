@@ -12,7 +12,12 @@ const CardSingle = ({ article }: Props) => {
   return (
     <div className="pb-4 px-4 mx-4 md:mx-0">
       <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden dark:shadow-sm dark:shadow-blue-800 shadow-gray-500">
-        <a href={article.url}>
+        <a
+          href={
+            // @ts-ignore
+            article.url
+          }
+        >
           <Image
             className="lg:h-48 md:h-36 w-full object-cover object-center"
             src={
@@ -38,7 +43,9 @@ const CardSingle = ({ article }: Props) => {
           <div className="flex items-center flex-wrap">
             <a
               className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer"
+              // @ts-ignore
               href={article.url}
+              rel="noreferrer"
               target="_blank"
             >
               Read More

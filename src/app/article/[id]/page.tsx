@@ -18,7 +18,7 @@ import PieChart from "components/Charts/PieChart";
 import imgBlob from "public/test.png";
 const Props = {};
 
-const page = ({ params }: any) => {
+const Page = ({ params }: any) => {
   const articleId = params["id"];
   console.log(articleId);
 
@@ -91,6 +91,7 @@ const page = ({ params }: any) => {
       // @ts-ignore
       _nodes.push({
         id: node,
+        // @ts-ignore
         label: names[node] ?? Math.round(Math.random() * 100000).toString(),
       });
     }
@@ -129,6 +130,7 @@ const page = ({ params }: any) => {
       .then((data) => {
         console.log(data);
         setPie1Data({
+          // @ts-ignore
           labels: ["Fake", "Not Fake"],
           datasets: [
             {
@@ -167,7 +169,9 @@ const page = ({ params }: any) => {
     if (!article) return;
     fetchProp(article.content);
     fetchFake(article.content);
+    // @ts-ignore
     let keys = article["keys"];
+    // @ts-ignore
     let prob = article["prob"];
     keys = keys.slice(1, keys.length - 1).split(", ");
     const k = [];
@@ -181,10 +185,12 @@ const page = ({ params }: any) => {
     }
     console.log("article", k, " ", prob);
     setTweetData({
+      // @ts-ignore
       labels: k,
       datasets: [
         {
           label: "Tweet Analysis",
+          // @ts-ignore
           data: p,
           backgroundColor: [
             "rgb(129, 236, 236, 0.2)",
@@ -207,6 +213,7 @@ const page = ({ params }: any) => {
       body: JSON.stringify({ content: article!.content.slice(0, 100) }),
     }).then((data) => {
       console.log(data);
+      // @ts-ignore
       setImgBlob("data:image/png;base64, " + data);
     });
   };
@@ -288,7 +295,10 @@ const page = ({ params }: any) => {
                       </div>
                       <div className="md:flex-grow">
                         <h2 className="text-2xl font-medium dark:text-white text-gray-900 title-font mb-2">
-                          {propagandaMap[propa]}
+                          {
+                            // @ts-ignore
+                            propagandaMap[propa]
+                          }
                         </h2>
                       </div>
                     </div>
@@ -362,7 +372,6 @@ const page = ({ params }: any) => {
             </div>
           </div>
         </div>
-
         <div className="h-100 shadow-sm dark:shadow-blue-800 shadow-gray-500 rounded-md">
           <div className="flex flex-col justify-center items-center m-4">
             <p className="text-2xl font-bold tracking-wide dark:text-white my-4">
@@ -392,4 +401,4 @@ const page = ({ params }: any) => {
   );
 };
 
-export default page;
+export default Page;

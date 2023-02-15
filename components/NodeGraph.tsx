@@ -39,7 +39,9 @@ const NodeGraph = (props: Props) => {
       edges: props.edges,
     },
     events: {
+      // @ts-ignore
       select: ({ nodes, edges }) => {},
+      // @ts-ignore
       doubleClick: ({ pointer: { canvas } }) => {},
     },
   });
